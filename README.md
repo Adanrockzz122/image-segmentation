@@ -31,50 +31,5 @@ The results are displayed for k=2, k=3, and k=4 to showcase how varying the numb
 Optimal K-value through Elbow Method:
 
 The Elbow Method is applied to determine the best value of k for K-Means clustering. By calculating the Within-Cluster Sum of Squares (WCSS) for various values of k, we identify the point where adding more clusters no longer significantly reduces the WCSS. This point, or "elbow," suggests the optimal k for the dataset.
-Grayscale Preprocessing and Segmentation:
 
-The image is converted to grayscale to simplify the clustering process. The K-Means clustering is then applied to the grayscale image to see how well the algorithm can segment the image based on pixel intensity.
-Code Implementation
-The code is implemented in Python using the following libraries:
-
-OpenCV for image loading, resizing, and conversion.
-Matplotlib for visualization.
-Scikit-learn for the K-Means clustering algorithm and the Elbow Method.
-
-Example Code for K-Means Segmentation (k=3)
-import numpy as np
-import cv2
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-
-# Load the image
-image = cv2.imread('path_to_image.jpg')  
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-# Flatten the image
-pixels = image.reshape(-1, 3)  
-pixels = np.float32(pixels)  
-
-# Perform K-Means Clustering for k=3
-k = 3
-kmeans = KMeans(n_clusters=k, random_state=42)
-labels = kmeans.fit_predict(pixels)
-centers = np.uint8(kmeans.cluster_centers_)  
-segmented_pixels = centers[labels.flatten()]  
-segmented_image = segmented_pixels.reshape(image.shape)  
-
-# Plot the original and segmented images
-plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
-plt.imshow(image)
-plt.title('Original Image')
-plt.axis('off')
-
-plt.subplot(1, 2, 2)
-plt.imshow(segmented_image)
-plt.title('Segmented Image (k=3)')
-plt.axis('off')
-
-plt.tight_layout()
-plt.show()
 
